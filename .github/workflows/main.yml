@@ -1,13 +1,26 @@
 name: CD
 
 env:
-  AZURE_WEBAPP_NAME: kemurareactapp
+  AZURE_WEBAPP_NAME: xxxxx
   AZURE_WEBAPP_PACKAGE_PATH: "."
 
 on:
   push:
-    branches: [main]
-
+    branches:
+      - 'aplha/**'
+      - 'beta/**'
+      - 'demo/**'
+  pull_request:
+      # refs/heads にマッチするパターンのシーケンス
+    branches:
+      - 'main'
+      - 'releases/**'
+    # refs/heads にマッチするパターンのシーケンス
+    tags:
+      - 'v*.*'
+    paths-ignore:
+      - 'public/**'
+      - 'docs/**'
   workflow_dispatch:
 
 jobs:
